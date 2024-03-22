@@ -4,22 +4,30 @@
 ## Getting Started
 ---
 1. Reopen in container
-2. link acc and oj
+2. install tools
+```
+  # acc
+  npm i -g atcoder-cli
+
+  # oj
+  pip3 install online-judge-tools
+```
+3. link acc and oj
 ```
   acc check-oj
 ```
-3. login AtCoder
+4. login AtCoder
 ```
   acc login
   # type AtCoder Username and Password
 
   oj login https://atcoder.jp/
 ```
-4. change sample case dir will create by acc as test from tests
+5. change sample case dir will create by acc as test from tests
 ```
   acc config default-test-dirname-format test
 ```
-5. Download all tasks by default when acc new
+6. Download all tasks by default when acc new
 ```
   acc config default-task-choice all
 ```
