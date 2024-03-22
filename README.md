@@ -39,7 +39,7 @@
   acc new abc288
 
   cd abc288/a
-  touch main.hs
+  touch Main.hs
 ```
 ##### run test
 ```
