@@ -1,0 +1,14 @@
+{
+  "name": "atcoder-hs dev-container",
+  "dockerComposeFile": "docker-compose.yaml",
+  "service": "hs-container",
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "haskell.haskell",
+        "justusadam.language-haskell"
+      ]
+    }
+  }
+}
