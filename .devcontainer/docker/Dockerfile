@@ -8,7 +8,8 @@ RUN apt install -y --no-install-recommends build-essential curl libffi-dev libff
 RUN apt update -y && apt install -y gpg sudo wget curl
 RUN install -dm 755 /etc/apt/keyrings
 RUN wget -qO - https://mise.jdx.dev/gpg-key.pub | gpg --dearmor | tee /etc/apt/keyrings/mise-archive-keyring.gpg 1> /dev/null
-RUN echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=amd64] https://mise.jdx.dev/deb stable main" | sudo tee /etc/apt/sources.list.d/mise.list
+# RUN echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=amd64] https://mise.jdx.dev/deb stable main" | sudo tee /etc/apt/sources.list.d/mise.list
+RUN echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=arm64] https://mise.jdx.dev/deb stable main" | sudo tee /etc/apt/sources.list.d/mise.list
 RUN apt update && apt install -y mise
 
 RUN echo 'eval "$(mise activate bash)"' >> ~/.bashrc
