@@ -1,14 +1,21 @@
 {
-  "name": "atcoder-hs dev-container",
-  "dockerComposeFile": "docker-compose.yaml",
-  "service": "hs-container",
-  "workspaceFolder": "/workspace",
+  "name": "atcoder-hs",
+  "build":{
+    "dockerfile": "Dockerfile"
+  },
+  "workspaceFolder": "/workspaces/atcoder-hs",
   "customizations": {
     "vscode": {
+      "settings": {},
       "extensions": [
         "haskell.haskell",
         "justusadam.language-haskell"
       ]
     }
-  }
+  },
+  "features": {
+  },
+  "runArgs": [
+    "--network=host"
+  ]
 }
