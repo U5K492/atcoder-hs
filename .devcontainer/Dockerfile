@@ -8,7 +8,7 @@ RUN apt-get install -y curl
 
 RUN apt-get install -y gpg sudo wget
 RUN install -dm 755 /etc/apt/keyrings
-
+RUN apt-get install git
 
 RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | BOOTSTRAP_HASKELL_NONINTERACTIVE=1 BOOTSTRAP_HASKELL_GHC_VERSION=9.4.8 BOOTSTRAP_HASKELL_CABAL_VERSION=3.8.1.0 sh
 
@@ -20,7 +20,7 @@ ENV TZ=Asia/Tokyo
 RUN wget -qO - https://mise.jdx.dev/gpg-key.pub | gpg --dearmor | tee /etc/apt/keyrings/mise-archive-keyring.gpg 1> /dev/null
 # RUN echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=amd64] https://mise.jdx.dev/deb stable main" | sudo tee /etc/apt/sources.list.d/mise.list
 RUN echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=arm64] https://mise.jdx.dev/deb stable main" | sudo tee /etc/apt/sources.list.d/mise.list
-RUN apt update && apt install -y mise
+RUN apt-get update && apt-get install -y mise
 
 RUN echo 'eval "$(mise activate bash)"' >> ~/.bashrc
 
