@@ -22,9 +22,5 @@
     }
   },
   "features": {},
-  "runArgs": ["--network=host"],
-  "onCreateCommand": "",
-  "postStartCommand": "",
-  "postAttachCommand": "",
-  "overrideCommand": false
+  "runArgs": ["--network=host"]
 }
