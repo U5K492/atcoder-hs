@@ -5,7 +5,7 @@ RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y curl
 
 
-RUN apt-get install -y gpg sudo wget git
+RUN apt-get install -y gpg sudo wget git openssh-client
 RUN install -dm 755 /etc/apt/keyrings
 
 RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | BOOTSTRAP_HASKELL_NONINTERACTIVE=1 BOOTSTRAP_HASKELL_GHC_VERSION=9.4.8 BOOTSTRAP_HASKELL_CABAL_VERSION=3.8.1.0 sh
