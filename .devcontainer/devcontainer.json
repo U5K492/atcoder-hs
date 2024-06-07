@@ -1,0 +1,26 @@
+{
+  "name": "atcoder-hs",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "workspaceFolder": "/workspaces/atcoder-hs",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "haskell.serverEnvironment": {},
+        "haskell.toolchain": {
+          "ghc": "9.4.8",
+          "hls": "2.7.0.0",
+          "cabal": "3.8.1.0"
+        }
+      },
+      "extensions": [
+        "haskell.haskell",
+        "justusadam.language-haskell",
+        "asvetliakov.vscode-neovim"
+      ]
+    }
+  },
+  "features": {},
+  "runArgs": ["--network=host"]
+}
