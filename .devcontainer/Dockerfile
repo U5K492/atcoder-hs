@@ -29,4 +29,4 @@ RUN mise i python@3.12.2 && mise use -g python@latest
 RUN curl -LO https://github.com/neovim/neovim/releases/download/v0.9.5/nvim.appimage
 RUN chmod u+x nvim.appimage
 RUN ./nvim.appimage --appimage-extract
-RUN ln -s /squashfs-root/AppRun /usr/bin/nvim
+RUN ln -s /squashfs-root/usr/bin/nvim /usr/bin/nvim

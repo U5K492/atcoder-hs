@@ -1,14 +1,13 @@
 {
   "name": "atcoder-hs",
-  "build":{
+  "build": {
     "dockerfile": "Dockerfile"
   },
   "workspaceFolder": "/workspaces/atcoder-hs",
   "customizations": {
     "vscode": {
       "settings": {
-        "haskell.serverEnvironment": {
-        },
+        "haskell.serverEnvironment": {},
         "haskell.toolchain": {
           "ghc": "9.4.8",
           "hls": "2.7.0.0",
@@ -22,9 +21,10 @@
       ]
     }
   },
-  "features": {
-  },
-  "runArgs": [
-    "--network=host"
-  ]
+  "features": {},
+  "runArgs": ["--network=host"],
+  "onCreateCommand": "",
+  "postStartCommand": "",
+  "postAttachCommand": "",
+  "overrideCommand": false
 }
