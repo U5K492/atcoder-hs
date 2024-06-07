@@ -36,6 +36,7 @@
 ```
   ex) ABC288
 
+  cd src
   acc new abc288
 
   cd abc288/a
