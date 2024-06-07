@@ -3,12 +3,10 @@ FROM haskell:9.4.8-slim
 RUN chsh -s /bin/bash
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y curl
-# RUN apt-get install -y --no-install-recommends build-essential curl libffi-dev libffi8ubuntu1 libgmp-dev libgmp10 libncurses-dev libncurses5 libtinfo5 llvm-14
 
 
-RUN apt-get install -y gpg sudo wget
+RUN apt-get install -y gpg sudo wget git
 RUN install -dm 755 /etc/apt/keyrings
-RUN apt-get install git
 
 RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | BOOTSTRAP_HASKELL_NONINTERACTIVE=1 BOOTSTRAP_HASKELL_GHC_VERSION=9.4.8 BOOTSTRAP_HASKELL_CABAL_VERSION=3.8.1.0 sh
 
