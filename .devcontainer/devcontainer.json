@@ -1,8 +1,12 @@
 {
   "name": "atcoder-hs",
   "build": {
-    "dockerfile": "Dockerfile"
+    "dockerfile": "Dockerfile",
+    "args": {
+      "USER": "${localEnv:USER}"
+    }
   },
+  "updateRemoteUserUID": true,
   "workspaceFolder": "/workspaces/atcoder-hs",
   "customizations": {
     "vscode": {

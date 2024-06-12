@@ -1,24 +1,44 @@
-FROM --platform=linux/amd64 haskell:9.4.8-slim as builder
+FROM --platform=linux/amd64 node:20.11.1-alpine as node
+FROM --platform=linux/amd64 python:3.12.2-alpine as python
+FROM --platform=linux/amd64 haskell:9.4.8-slim
 
-RUN chsh -s /bin/bash && \
-    apt-get update && \
-    apt-get install -y --purge --no-install-recommends curl  gpg sudo wget git openssh-client && \
+
+RUN apt-get update && \
+    apt-get install -y --purge --no-install-recommends \
+    curl \
+    gpg \
+    sudo \
+    wget \
+    git \
+    openssh-client && \
     apt-get -y clean && \
+    rm -rf /var/lib/apt/lists/* && \
     install -dm 755 /etc/apt/keyrings
 
+ARG USER
+
+RUN useradd -m -s /bin/bash $USER && \
+    echo "$USER ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers
+USER $USER
+
+COPY --from=node /usr/local/bin /usr/local/bin
+COPY --from=node /usr/local/lib/node_modules/npm /usr/local/lib/node_modules/npm
+
+COPY --from=python /usr/local/bin /usr/local/bin
+COPY --from=python /usr/local/lib /usr/local/lib
+COPY --from=python /usr/local/include /usr/local/include
+
+
+ENV TZ=Asia/Tokyo
+
 RUN curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | BOOTSTRAP_HASKELL_NONINTERACTIVE=1 BOOTSTRAP_HASKELL_GHC_VERSION=9.4.8 BOOTSTRAP_HASKELL_CABAL_VERSION=3.8.1.0 sh
-ENV PATH="${PATH}:/root/.ghcup/bin:/root/.cabal/bin:/root/.ghc/bin:/root/.ghcup/hls/2.7.0.0/bin"
+ENV PATH="${PATH}:/home/$USER/.ghcup/bin:/home/$USER/.cabal/bin:/home/$USER/.ghc/bin:/home/$USER/.ghcup/hls/2.7.0.0/bin"
 RUN ghcup install hls 2.7.0.0
 
-RUN wget -qO - https://mise.jdx.dev/gpg-key.pub | gpg --dearmor | tee /etc/apt/keyrings/mise-archive-keyring.gpg 1> /dev/null && \
-    echo "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=amd64] https://mise.jdx.dev/deb stable main" | sudo tee /etc/apt/sources.list.d/mise.list && \
-    apt-get update && apt-get install -y mise && \
-    echo 'eval "$(mise activate bash)"' >> ~/.bashrc && \
-    mise i node@20.11.1 && mise use -g node@latest && \
-    mise i python@3.12.2 && mise use -g python@latest && \
+RUN cd /home/$USER && \
     curl -LO https://github.com/neovim/neovim/releases/download/v0.9.5/nvim.appimage && \
     chmod u+x nvim.appimage && \
     ./nvim.appimage --appimage-extract && \
-    ln -s /squashfs-root/AppRun /usr/bin/nvim
+    sudo ln -s /home/$USER/squashfs-root/AppRun /usr/bin/nvim && \
+    rm ./nvim.appimage
 
-ENV TZ=Asia/Tokyo
